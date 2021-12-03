@@ -1,0 +1,143 @@
+---
+# Generated from CLion C/C++ Code Style settings
+# + added *all* possible options beyond that, with their defaults
+# + further improvements
+# + commented out (useful) options appearing in later clang-format versions
+Language: Cpp
+BasedOnStyle: LLVM
+AccessModifierOffset: -4
+AlignAfterOpenBracket: AlwaysBreak
+AlignConsecutiveMacros: true
+AlignConsecutiveAssignments: false
+AlignConsecutiveDeclarations: false
+AlignEscapedNewlines: DontAlign
+AlignOperands: false
+AlignTrailingComments: false
+AllowAllArgumentsOnNextLine: true
+AllowAllConstructorInitializersOnNextLine: true
+AllowAllParametersOfDeclarationOnNextLine: true
+#AllowShortBlocksOnASingleLine: Never
+AllowShortCaseLabelsOnASingleLine: false
+AllowShortFunctionsOnASingleLine: None
+AllowShortIfStatementsOnASingleLine: Never
+AllowShortLambdasOnASingleLine: None
+AllowShortLoopsOnASingleLine: false
+AlwaysBreakAfterDefinitionReturnType: None
+AlwaysBreakAfterReturnType: None
+AlwaysBreakBeforeMultilineStrings: false
+AlwaysBreakTemplateDeclarations: Yes
+BinPackArguments: false
+BinPackParameters: false
+BraceWrapping:
+  AfterCaseLabel: false
+  AfterClass: true
+  #AfterControlStatement: Never
+  AfterEnum: true
+  AfterFunction: true
+  AfterNamespace: true
+  AfterStruct: true
+  AfterUnion: true
+  AfterExternBlock: false
+  BeforeCatch: false
+  BeforeElse: false
+  IndentBraces: false
+  SplitEmptyFunction: true
+  SplitEmptyRecord: true
+  SplitEmptyNamespace: true
+BreakBeforeBinaryOperators: NonAssignment
+BreakBeforeBraces: Custom
+#BreakBeforeInheritanceComma: false
+BreakInheritanceList: BeforeComma
+BreakBeforeTernaryOperators: true
+BreakConstructorInitializers: BeforeComma
+BreakStringLiterals: true
+ColumnLimit: 120
+CommentPragmas: '^([^ ]| IWYU pragma:)'
+CompactNamespaces: false
+ConstructorInitializerAllOnOneLineOrOnePerLine: false
+ConstructorInitializerIndentWidth: 4
+ContinuationIndentWidth: 4
+Cpp11BracedListStyle: true
+#DeriveLineEnding: true
+DerivePointerAlignment: false
+DisableFormat: false
+ExperimentalAutoDetectBinPacking: false
+FixNamespaceComments: true
+ForEachMacros: [FOREACH, FOREACH_PROPERTIES, FOREACH_PROPERTY_GROUP, FOREACH_TAG,
+                Q_FOREACH, BOOST_FOREACH]
+IncludeBlocks: Preserve
+IncludeCategories:
+  - Regex: '^<.*>'
+    Priority: 4
+  # Instead of adding every 3rd party lib in the world, you're better off achieving grouping by using empty lines
+  # around that 3rd party block.
+  - Regex: '^"((google|gtest|gmock)/.*")|asio.*'
+    Priority: 3
+  - Regex: '^".*/.*"'
+    Priority: 2
+  - Regex: '.*'
+    Priority: 1
+IncludeIsMainRegex: ''
+#IncludeIsMainSourceRegex: '(\.test\.)?'
+IndentCaseLabels: true
+#IndentGotoLabels: false
+IndentPPDirectives: None
+IndentWidth: 4
+IndentWrappedFunctionNames: false
+KeepEmptyLinesAtTheStartOfBlocks: false
+MacroBlockBegin:
+  'XTR_CHILDREN_BEG|XTR_CHILDREN_BEG_AFTER_ATTRS|XTR_ATTRS_BEG|EXPORT_CSV_BEG|EXPORT_NAMED_CSV_BEG|DUMP_BEG' # #if
+MacroBlockEnd:
+  'XTR_CHILDREN_END|XTR_CHILDREN_END_UNCHECKED|XTR_ATTRS_END|EXPORT_CSV_END|DUMP_END' # #endif|#else|#elif
+MaxEmptyLinesToKeep: 2
+NamespaceIndentation: None
+#NamespaceMacros:
+#  -
+# commented values below where an experiment (choices of a prominent project), current values are llvm defaults
+PenaltyBreakAssignment: 2 #20
+PenaltyBreakBeforeFirstCallParameter: 19 #30
+PenaltyBreakComment: 300 #20
+PenaltyBreakFirstLessLess: 120 #20
+PenaltyBreakString: 1000 #20
+PenaltyBreakTemplateDeclaration: 10
+PenaltyExcessCharacter: 1000000
+PenaltyReturnTypeOnItsOwnLine: 60 #100
+PointerAlignment: Left
+ReflowComments: true
+SortIncludes: true
+SortUsingDeclarations: true
+SpaceAfterCStyleCast: false
+SpaceAfterLogicalNot: false
+SpaceAfterTemplateKeyword: false
+SpaceBeforeAssignmentOperators: true
+SpaceBeforeCpp11BracedList: false
+SpaceBeforeCtorInitializerColon: true
+SpaceBeforeInheritanceColon: true
+SpaceBeforeParens: ControlStatements
+SpaceBeforeRangeBasedForLoopColon: true
+#SpaceInEmptyBlock: false
+SpaceInEmptyParentheses: false
+SpacesBeforeTrailingComments: 1
+SpacesInAngles: false
+#SpacesInConditionalStatement: false
+SpacesInContainerLiterals: false
+SpacesInCStyleCastParentheses: false
+SpacesInParentheses: false
+SpacesInSquareBrackets: false
+#SpaceBeforeSquareBrackets: false
+Standard: Cpp11 #Latest
+StatementMacros:
+  - Q_UNUSED
+  - QT_REQUIRE_VERSION
+  - DEFAULT_NON_IMPLEMENTATION_GenericOtdsComponent
+  - DEFAULT_NON_IMPLEMENTED_GenericOtdsComponent
+  - GEN_DEFINITION_db_cast
+TabWidth: 4
+#TypenameMacros:
+#  - ...
+#UseCRLF: false
+UseTab: Never
+#WhitespaceSensitiveMacros:
+#  - ENABLE_GCC_WARNING
+#  - DISABLE_GCC_WARNING
+#  - ENABLE_CLANG_WARNING
