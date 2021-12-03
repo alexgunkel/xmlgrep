@@ -1,4 +1,4 @@
-#include "XmlGrepper.hpp"
+#include "xml_grepper.hpp"
 
 #include <utility>
 #include <vector>
@@ -25,18 +25,17 @@ bool containsTag(const std::string& needle, const std::string& hayStack)
 }
 }
 
-void XmlGrepper::parse(std::istream &in, std::ostream &out) {
+void XmlGrepper::parse(std::istream &in, OutputFormatter &out) {
     std::string line;
     uint64_t depth{0};
     bool found{false};
-    std::vector<std::string> cache;
     while (std::getline(in, line)) {
         if (containsTag(begin_, line)) {
             depth++;
         }
 
         if (depth) {
-            cache.push_back(line);
+            out.addLine(line);
         }
 
         if (depth && !found && line.find(needle_) != std::string::npos) {
@@ -47,12 +46,10 @@ void XmlGrepper::parse(std::istream &in, std::ostream &out) {
             depth--;
             if (!depth && found) {
                 found = false;
-                for (const auto &l: cache) {
-                    out << l << "\n";
-                }
+                out.addEntry();
             }
             if (!depth) {
-                cache.clear();
+                out.reset();
             }
         }
     }

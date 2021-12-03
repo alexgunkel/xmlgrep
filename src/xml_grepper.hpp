@@ -1,5 +1,7 @@
-#ifndef XMLGREP_XMLGREPPER_HPP
-#define XMLGREP_XMLGREPPER_HPP
+#ifndef XMLGREP_XML_GREPPER_HPP
+#define XMLGREP_XML_GREPPER_HPP
+
+#include "output_formatter.hpp"
 
 #include <iostream>
 #include <string>
@@ -9,7 +11,7 @@ class XmlGrepper {
 public:
     XmlGrepper(const std::string& tagName, std::string  needle);
 
-    void parse(std::istream& in, std::ostream& out);
+    void parse(std::istream& in, OutputFormatter& out);
 
 private:
     std::string begin_;
@@ -18,4 +20,4 @@ private:
 };
 }
 
-#endif //XMLGREP_XMLGREPPER_HPP
+#endif //XMLGREP_XML_GREPPER_HPP
