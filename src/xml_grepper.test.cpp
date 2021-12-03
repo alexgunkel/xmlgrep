@@ -27,5 +27,10 @@ INSTANTIATE_TEST_CASE_P
  ::testing::Values(GrepperTestParams{"<Tag><a>needle</a></Tag>\n", "<Tag><a>needle</a></Tag>\n"},
                    GrepperTestParams{"<Tag>\n<a>\nbar\n</a>\n</Tag>\n", ""},
                    GrepperTestParams{"<Tags>\n<a>\nneedle\n</a>\n</Tags>\n", ""},
-                   GrepperTestParams{"<Tag>\n<Tag>\nneedle\n</Tag>\n</Tag>\n", "<Tag>\n<Tag>\nneedle\n</Tag>\n</Tag>\n"},
+                   GrepperTestParams{"<Tag>\n<Tag>\nneedle\n</Tag>\n</Tag>\n",
+                                     "<Tag>\n<Tag>\nneedle\n</Tag>\n</Tag>\n"},
+                   GrepperTestParams{"<a>b</a><Tag>needle</Tag>\n", "        <Tag>needle</Tag>\n"},
+                   GrepperTestParams{"<Tag>needle</Tag><a>b</a>\n", "<Tag>needle</Tag>\n"},
+                   GrepperTestParams{"<Tag class=\"needle\"/>\n",
+                                     "<Tag class=\"needle\"/>\n"},
                    GrepperTestParams{"<Tag>\n<a>\nneedle\n</a>\n</Tag>\n", "<Tag>\n<a>\nneedle\n</a>\n</Tag>\n"}));
