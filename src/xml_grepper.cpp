@@ -5,9 +5,13 @@
 
 namespace xmlgrep {
 
-XmlGrepper::XmlGrepper(const std::string &tagName, std::string needle) : begin_{"<" + tagName},
-                                                                         end_{"</" + tagName + ">"},
-                                                                         needle_{std::move(needle)} {
+XmlGrepper::XmlGrepper(OutputFormatter &outputFormatter, const std::string &tagName, std::string needle) :
+        out_{outputFormatter}, begin_{"<" + tagName},
+        end_{"</" +
+             tagName +
+             ">"},
+        needle_{std::move(
+                needle)} {
 
 }
 
@@ -27,10 +31,9 @@ std::pair<uint64_t, bool> containsTag(const std::string &needle, const std::stri
 }
 }
 
-void XmlGrepper::parse(std::istream &in, OutputFormatter &out) {
+void XmlGrepper::parse(std::istream &in) {
     std::string line;
     uint64_t depth{0};
-    bool found{false};
     bool isOpen{false};
     bool isSelfClosing{false};
     size_t closingSignPosition{};
@@ -46,10 +49,10 @@ void XmlGrepper::parse(std::istream &in, OutputFormatter &out) {
         if (isOpen) {
             closingSignPosition = line.find('>');
             isOpen = closingSignPosition == std::string::npos;
-            isSelfClosing = !isOpen && line[closingSignPosition - 1] == '/';
+            isSelfClosing = !isOpen && line[closingSignPosition + 1] == '/';
         }
 
-        if (depth || isOpen) {
+        if (depth) {
             if (isSelfClosing) {
                 line.resize(closingSignPosition + 1);
                 depth--;
@@ -57,19 +60,24 @@ void XmlGrepper::parse(std::istream &in, OutputFormatter &out) {
                 line.resize(posOfEndTag + end_.size());
                 depth--;
             }
-            out.addLine(line);
+            out_.addLine(line);
 
-            found |= line.find(needle_) != std::string::npos;
+            found_ |= line.find(needle_) != std::string::npos;
 
             if (!depth) {
-                if (found) {
-                    found = false;
-                    out.addEntry();
-                } else {
-                    out.reset();
-                }
+                flush();
             }
         }
+    }
+    flush();
+}
+
+void XmlGrepper::flush() {
+    if (found_) {
+        out_.addEntry();
+        found_ = false;
+    } else {
+        out_.reset();
     }
 }
 }

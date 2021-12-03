@@ -1,5 +1,6 @@
 #include "output_formatter.hpp"
 
+#include <cassert>
 #include <iostream>
 
 Printer::Printer(std::ostream &ostream): ostream_{ostream}, cache_{} {
@@ -22,7 +23,8 @@ void Printer::reset() {
 }
 
 Counter::~Counter() {
-    std::cout << entries_ << " " << lines_ << std::endl;
+    assert(!lineCache_);
+    out_ << entries_ << " " << lines_ << std::endl;
 }
 
 void Counter::addLine(const std::string &line) {
@@ -37,4 +39,8 @@ void Counter::addEntry() {
 
 void Counter::reset() {
     lineCache_ = 0;
+}
+
+Counter::Counter(std::ostream &ostream): out_{ostream} {
+
 }

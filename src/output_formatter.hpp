@@ -31,6 +31,7 @@ private:
 class Counter final : public OutputFormatter
 {
 public:
+    explicit Counter(std::ostream& ostream);
     ~Counter() override;
 
     void addLine(const std::string &line) override;
@@ -40,6 +41,7 @@ public:
     void reset() override;
 
 private:
+    std::ostream &out_;
     uint64_t entries_{0};
     uint64_t lines_{0};
     uint64_t lineCache_{0};

@@ -9,11 +9,14 @@
 namespace xmlgrep {
 class XmlGrepper {
 public:
-    XmlGrepper(const std::string& tagName, std::string  needle);
+    XmlGrepper(OutputFormatter& out, const std::string& tagName, std::string  needle);
 
-    void parse(std::istream& in, OutputFormatter& out);
+    void parse(std::istream& in);
 
 private:
+    void flush();
+    bool found_{false};
+    OutputFormatter& out_;
     std::string begin_;
     std::string end_;
     std::string needle_;

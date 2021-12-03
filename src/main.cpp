@@ -17,19 +17,20 @@ int main(int argc, char *argv[])
     app.add_option<std::string>("file", file);
     CLI11_PARSE(app, argc, argv);
 
-    xmlgrep::XmlGrepper grepper{tag, needle};
     std::unique_ptr<OutputFormatter> output;
     if (countOnly) {
-        output = std::make_unique<Counter>();
+        output = std::make_unique<Counter>(std::cout);
     } else {
         output = std::make_unique<Printer>(std::cout);
     }
 
+    xmlgrep::XmlGrepper grepper{*output, tag, needle};
+
     if (file.empty()) {
-        grepper.parse(std::cin, *output);
+        grepper.parse(std::cin);
     } else {
         std::fstream fileStream{file};
-        grepper.parse(fileStream, *output);
+        grepper.parse(fileStream);
     }
 
     return 0;
