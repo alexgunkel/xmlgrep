@@ -44,3 +44,11 @@ void Counter::reset() {
 Counter::Counter(std::ostream &ostream): out_{ostream} {
 
 }
+
+std::unique_ptr<OutputFormatter> createOutputFormatter(std::ostream& out, bool count)
+{
+    if (count)
+        return std::make_unique<Counter>(out);
+
+    return std::make_unique<Printer>(out);
+}

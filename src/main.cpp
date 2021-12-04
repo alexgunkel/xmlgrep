@@ -2,35 +2,26 @@
 #include <iostream>
 #include "xml_grepper.hpp"
 
+#include "params.hpp"
+#include "input.hpp"
+
 #include <CLI/CLI.hpp>
 
 int main(int argc, char *argv[])
 {
-    CLI::App app{"xmlparser"};
-    std::string tag{};
-    std::string needle{};
-    std::string file{};
-    bool countOnly{false};
-    app.add_option<std::string>("--tag", tag, "tag to report")->required();
-    app.add_option<std::string>("--needle", needle, "tag to report");
-    app.add_flag("-c", countOnly);
-    app.add_option<std::string>("file", file);
-    CLI11_PARSE(app, argc, argv);
-
-    std::unique_ptr<OutputFormatter> output;
-    if (countOnly) {
-        output = std::make_unique<Counter>(std::cout);
-    } else {
-        output = std::make_unique<Printer>(std::cout);
+    const xmlparser::Params params{argc, argv};
+    if (params.help) {
+        return params.status;
     }
 
-    xmlgrep::XmlGrepper grepper{*output, tag, needle};
+    auto output{createOutputFormatter(std::cout, params.count)};
 
-    if (file.empty()) {
-        grepper.parse(std::cin);
-    } else {
-        std::fstream fileStream{file};
-        grepper.parse(fileStream);
+    xmlgrep::XmlGrepper grepper{*output, params.tag, params.needle};
+
+    xmlgrep::Input input{params.files};
+
+    for (auto &in: input) {
+        grepper.parse(in);
     }
 
     return 0;

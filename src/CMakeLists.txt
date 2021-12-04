@@ -14,7 +14,7 @@ target_link_libraries(fuzz-xmlgrep
         PRIVATE $<$<C_COMPILER_ID:Clang>:-fsanitize=fuzzer>
         )
 
-add_executable(xmlgrep main.cpp)
+add_executable(xmlgrep main.cpp params.cpp params.hpp input.cpp input.hpp)
 target_link_libraries(xmlgrep PRIVATE grepper CLI11::CLI11)
 install(TARGETS xmlgrep
         RUNTIME DESTINATION "${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_BINDIR}"

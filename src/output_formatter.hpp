@@ -3,6 +3,7 @@
 
 #include <string>
 #include <vector>
+#include <memory>
 
 class OutputFormatter {
 public:
@@ -46,5 +47,7 @@ private:
     uint64_t lines_{0};
     uint64_t lineCache_{0};
 };
+
+std::unique_ptr<OutputFormatter> createOutputFormatter(std::ostream& out, bool count);
 
 #endif //XMLGREP_OUTPUT_FORMATTER_HPP
