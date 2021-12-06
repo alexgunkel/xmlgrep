@@ -3,7 +3,8 @@
 #include <cassert>
 #include <iostream>
 
-Printer::Printer(std::ostream &ostream): ostream_{ostream}, cache_{} {
+Printer::Printer(std::ostream &ostream, const std::string &delimiter) : ostream_{ostream}, cache_{},
+                                                                        delimiter_{delimiter} {
 
 }
 
@@ -14,6 +15,9 @@ void Printer::addLine(const std::string &line) {
 void Printer::addEntry() {
     for (const auto &line: cache_) {
         ostream_ << line << "\n";
+    }
+    if (!delimiter_.empty()) {
+        ostream_ << delimiter_ << "\n";
     }
     cache_.clear();
 }
@@ -41,14 +45,13 @@ void Counter::reset() {
     lineCache_ = 0;
 }
 
-Counter::Counter(std::ostream &ostream): out_{ostream} {
+Counter::Counter(std::ostream &ostream) : out_{ostream} {
 
 }
 
-std::unique_ptr<OutputFormatter> createOutputFormatter(std::ostream& out, bool count)
-{
+std::unique_ptr<OutputFormatter> createOutputFormatter(std::ostream &out, bool count, const std::string &delimiter) {
     if (count)
         return std::make_unique<Counter>(out);
 
-    return std::make_unique<Printer>(out);
+    return std::make_unique<Printer>(out, delimiter);
 }

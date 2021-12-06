@@ -13,7 +13,7 @@ class GrepperTest : public testing::TestWithParam<GrepperTestParams> {
 
 TEST_P(GrepperTest, testFindTag) {
     std::stringstream out{};
-    Printer printer{out};
+    Printer printer{out, ""};
     xmlgrep::XmlGrepper grepper{printer, "Tag", "needle"};
     std::stringstream input{GetParam().in};
     grepper.parse(input);

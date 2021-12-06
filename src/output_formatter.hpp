@@ -16,7 +16,7 @@ public:
 class Printer final : public OutputFormatter
 {
 public:
-    explicit Printer(std::ostream& ostream);
+    explicit Printer(std::ostream& ostream, const std::string& delimiter);
 
     void addLine(const std::string &line) override;
 
@@ -27,6 +27,7 @@ public:
 private:
     std::vector<std::string> cache_;
     std::ostream &ostream_;
+    std::string delimiter_;
 };
 
 class Counter final : public OutputFormatter
@@ -48,6 +49,6 @@ private:
     uint64_t lineCache_{0};
 };
 
-std::unique_ptr<OutputFormatter> createOutputFormatter(std::ostream& out, bool count);
+std::unique_ptr<OutputFormatter> createOutputFormatter(std::ostream& out, bool count, const std::string& delimiter);
 
 #endif //XMLGREP_OUTPUT_FORMATTER_HPP

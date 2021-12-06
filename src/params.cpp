@@ -10,6 +10,7 @@ Params::Params(int argc, char **argv) {
     app.add_option<std::string>("--pattern,-e", needle, "any string to search for");
     app.add_flag("-c", count, "count occurences");
     app.add_option<std::vector<std::string>>("files", files);
+    app.add_option("-d", delimiter);
 
     try {
         app.parse(argc, argv);

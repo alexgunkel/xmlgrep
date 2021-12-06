@@ -14,7 +14,7 @@ int main(int argc, char *argv[])
         return params.status;
     }
 
-    auto output{createOutputFormatter(std::cout, params.count)};
+    auto output{createOutputFormatter(std::cout, params.count, params.delimiter)};
 
     xmlgrep::XmlGrepper grepper{*output, params.tag, params.needle};
 

@@ -15,6 +15,7 @@ public:
     std::string needle{};
     std::string file{};
     std::vector<std::string> files{};
+    std::string delimiter{};
     int status{0};
 };
 }
