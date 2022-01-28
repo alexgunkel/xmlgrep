@@ -28,7 +28,6 @@ INSTANTIATE_TEST_CASE_P
                    GrepperTestParams{"<Tag>\n<a>\nbar\n</a>\n</Tag>\n", ""},
                    GrepperTestParams{"<Tags>\n<a>\nneedle\n</a>\n</Tags>\n", ""},
                    GrepperTestParams{"<Tag>\n\tneedle\n</Tag>\t\n", "<Tag>\n\tneedle\n</Tag>\n"},
-                   GrepperTestParams{"\x01\x00\x00\x00\x00\x00\x00\x00", "<Tag>\n\tneedle\n</Tag>\n"},
                    GrepperTestParams{"<Tag>\n<Tag>\nneedle\n</Tag>\n</Tag>\n",
                                      "<Tag>\n<Tag>\nneedle\n</Tag>\n</Tag>\n"},
                    GrepperTestParams{"<a>b</a><Tag>needle</Tag>\n", "        <Tag>needle</Tag>\n"},
